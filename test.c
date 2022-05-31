@@ -3,7 +3,8 @@
 #include<string.h>
 #include<stdlib.h>
 
-void expr(int counter, char *tmp);
+char *expr(int counter, char *tmp);
+int string_count (char *in);
 int main(int argc, char *argv[]) {
     char ch;
     FILE *file = fopen("1.txt" , "r");
@@ -21,54 +22,65 @@ int main(int argc, char *argv[]) {
     char out[500];
     int n = 0;
     int l = 0;
+    int u = 0;
+    int str_count = string_count(in);
     for (int j = 0; j < count; j++) {
         n = 0;
         l = 0;
         if(format[j] == 'n') {
+            char tmp[8];
             int counter = 1;
-            int n = 0;
-            int l = 7;
-            char *tmp_2 = malloc(8*sizeof(char));
-            for (; in[n] != '\0'; n++, l++) {
-                expr(counter, tmp_2);
-                strcat(out, tmp_2);
+            for (int y = 0; y < str_count; y++, counter++, l++, n++) {
+                expr(counter, tmp);
+                strcat(out, tmp); // Реализовать построчную фигню (strcat)
                 l += 7;
-                if (in[n] == '\n') {
+                for(; in[n] != '\n'; n++, l++) {
                     out[l] = in[n];
-                    counter++;
-                    continue;
                 }
                 out[l] = in[n];
             }
-            out[l] = '\0';
-            free(tmp_2);
         }
     }
     printf("%s\n", out);
     
 }
 
-void expr(int counter, char *tmp) {
+
+char *expr(int counter, char *tmp) {
     if (counter < 10 && counter > 0) {
         sprintf(tmp, "     %d ", counter);
         tmp[8] = '\0';    
-    } else if (counter >= 10 && counter > 100) {
+    } else if (counter >= 10 && counter < 100) {
         sprintf(tmp, "    %d ", counter);
         tmp[8] = '\0';    
-    } else if (counter >= 100 && counter > 1000) {
+    } else if (counter >= 100 && counter < 1000) {
         sprintf(tmp, "   %d ", counter);
         tmp[8] = '\0';    
-    } else if (counter >= 1000 && counter > 10000) {
+    } else if (counter >= 1000 && counter < 10000) {
         sprintf(tmp, "  %d ", counter);
         tmp[8] = '\0';    
-    } else if (counter >= 10000 && counter > 100000) {
+    } else if (counter >= 10000 && counter < 100000) {
         sprintf(tmp, " %d ", counter);
         tmp[8] = '\0';    
-    } else if (counter >= 100000 && counter > 1000000) {
+    } else if (counter >= 100000 && counter < 1000000) {
         sprintf(tmp, "%d ", counter);
         tmp[8] = '\0';
     } 
     // else {
     //     printf("Слишком много\n");
     // }
+    printf("%s\n", tmp);
+    return tmp;
+}
+
+int string_count (char *in) {
+    int count = 1;
+    int i = 0;
+    while (in[i] != '\0') {
+        if (in[i] == '\n') {
+            count++;
+        }
+        i++;
+    }
+    return count;
 }
