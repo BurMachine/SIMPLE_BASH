@@ -29,7 +29,8 @@ char *processing(char *format, char *input, char *out) {
     char tmp[500];
     copy(input, out);
     for (int j = 0; j < count; j++) {
-        if(format[j] == 'E') {
+        n = 0; l = 0;
+        if(format[j] == 'e') {
             for(; out[n] != '\0';n++, l++) {
                 if(out[n] == '\n') {
                     tmp[l] = '$';
@@ -42,6 +43,9 @@ char *processing(char *format, char *input, char *out) {
             tmp[l] = '\0';
             copy(tmp, out);
             continue;
+        } 
+        else if (format[j] == 'n') {
+
         }
     }
     return out;
