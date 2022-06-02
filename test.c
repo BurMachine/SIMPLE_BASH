@@ -2,6 +2,7 @@
 #include<unistd.h>
 #include<string.h>
 #include<stdlib.h>
+#include "cat_lib.h"
 
 char *expr(int counter, char *tmp);
 int string_count (char *in);
@@ -16,33 +17,52 @@ int main(int argc, char *argv[]) {
         i++;
     }
     in[i] = '\0';
+//    printf("in:\n%s\n", in);
+//    printf("\n%c", in[i]);
     fclose(file);
     char format[10] = "beEsnt";
     int count = strlen(format);
     char out[500];
     int n = 0;
     int l = 0;
-    int u = 0;
-    int str_count = string_count(in);
     for (int j = 0; j < count; j++) {
         n = 0;
         l = 0;
         if(format[j] == 'n') {
-            char tmp[8];
             int counter = 1;
-            for (int y = 0; y < str_count; y++, counter++, l++, n++) {
-                expr(counter, tmp);
-                strcat(out, tmp); // Реализовать построчную фигню (strcat)
-                l += 7;
-                for(; in[n] != '\n'; n++, l++) {
-                    out[l] = in[n];
+            char tmp[10];
+            while (in[n] != '\0') {
+                int g = 0;
+                if(l == 0 ) {
+                    expr(counter, tmp);
+                    while (tmp[g] != '\0') {
+                        out[l] = tmp[g];
+                        l++;
+                        g++;
+                    }
                 }
-                out[l] = in[n];
+                if (in[n] == '\n') {
+                    g = 0;
+                    counter++;
+                    out[l] = in[n];
+                    l++;
+                    n++;
+                    expr(counter, tmp);
+                    while (tmp[g] != '\0') {
+                        out[l] = tmp[g];
+                        l++;
+                        g++;
+                    }
+                }
+                if (l != 0 && in[n] != '\n') {
+                    out[l] = in[n];
+                    n++, l++;
+                }
             }
+            out[l] = '\0';
         }
     }
-    printf("%s\n", out);
-    
+    printf("%s", out);
 }
 
 
@@ -69,7 +89,6 @@ char *expr(int counter, char *tmp) {
     // else {
     //     printf("Слишком много\n");
     // }
-    printf("%s\n", tmp);
     return tmp;
 }
 
