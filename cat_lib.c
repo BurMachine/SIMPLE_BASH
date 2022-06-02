@@ -96,3 +96,51 @@ char *format_N (char *out, char *in) {
     }
     out[l] = '\0';
 }
+
+char *format_B (char *out, char *in) {
+    int n = 0, m = 0;
+    int g = 0;
+    int counter = 1;
+    char tmp[10];
+    while (in[n] != '\0') {
+        if (n == 0 && in[n] == '\n') {
+            out[m] = in[n];
+            n++, m++;
+        }
+        if (n == 0 && in[n] != '\n') {
+            g = 0;
+            expr(counter, tmp);
+            while (tmp[g] != '\0') {
+                out[m] = tmp[g];
+                m++;
+                g++;
+            }
+            counter++;
+        }
+        while (in[n] != '\n' && in[n] != '\0') {
+            if (in[n - 1] == '\n') {
+                g = 0;
+                expr(counter, tmp);
+                while (tmp[g] != '\0') {
+                    out[m] = tmp[g];
+                    m++;
+                    g++;
+                }
+                counter++;
+            }
+            out[m] = in[n];
+            n++, m++;
+        }
+        if (in[n] == '\n' && in[n - 1] != '\n') {
+            g = 0;
+            out[m] = in[n];
+            n++, m++;
+        }
+        if (in[n] == '\n' && in[n - 1] == '\n') {
+            out[m] = in[n];
+            m++, n++;
+        }
+    }
+    out[m] = '\0';
+    return out;
+}

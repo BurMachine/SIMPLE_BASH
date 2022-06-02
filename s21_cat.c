@@ -48,6 +48,10 @@ char *processing(char *format, char *input, char *out) {
             format_N(tmp, out);
             copy(tmp, out);
         }
+        if (format[j] == 'b') {
+            format_B(tmp, out);
+            copy(tmp, out);
+        }
     }
     return out;
 }
