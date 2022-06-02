@@ -1,0 +1,3 @@
+/Users/gryffind/PROJECTS/github/SIMPLE_BASH/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/gryffind/PROJECTS/github/SIMPLE_BASH/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/gryffind/PROJECTS/github/SIMPLE_BASH/cmake-build-debug/CMakeFiles/SIMPLE_BASH.dir

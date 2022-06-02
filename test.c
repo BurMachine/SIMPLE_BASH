@@ -29,7 +29,6 @@ int main(int argc, char *argv[]) {
         n = 0;
         l = 0;
         if(format[j] == 'n') {
-<<<<<<< HEAD
             
         }
     }
