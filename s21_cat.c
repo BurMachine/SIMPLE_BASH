@@ -44,8 +44,9 @@ char *processing(char *format, char *input, char *out) {
             copy(tmp, out);
             continue;
         } 
-        else if (format[j] == 'n') {
-
+        if (format[j] == 'n') {
+            format_N(tmp, out);
+            copy(tmp, out);
         }
     }
     return out;
