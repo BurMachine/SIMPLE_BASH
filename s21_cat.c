@@ -56,6 +56,10 @@ char *processing(char *format, char *input, char *out) {
             format_S(tmp, out);
             copy(tmp, out);
         }
+        if (format[j] == 't') {
+            format_T(tmp, out);
+            copy(tmp, out);
+        }
     }
     return out;
 }

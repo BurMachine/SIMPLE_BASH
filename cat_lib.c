@@ -167,3 +167,20 @@ char *format_S (char *out, char *in) {
     out[l] = '\0';
     return out;
 }
+
+char *format_T(char *out, char *in) {
+    int l = 0, k = 0;
+    while (in[k] != '\0') {
+        if (in[k] == '\t') {
+            out[l] = '^';
+            l++;
+            out[l] = 'I';
+            l++, k++;
+        } else {
+            out[l] = in[k];
+            l++, k++;
+        }
+    }
+    out[l] = '\0';
+    return out;
+}
