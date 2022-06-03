@@ -52,6 +52,10 @@ char *processing(char *format, char *input, char *out) {
             format_B(tmp, out);
             copy(tmp, out);
         }
+        if (format[j] == 's') {
+            format_S(tmp, out);
+            copy(tmp, out);
+        }
     }
     return out;
 }

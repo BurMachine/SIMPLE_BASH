@@ -144,3 +144,26 @@ char *format_B (char *out, char *in) {
     out[m] = '\0';
     return out;
 }
+char *format_S (char *out, char *in) {
+    int k = 0;
+    int l = 0;
+    while (in[k] != '\0') {
+        if (in[k] != '\n') {
+            out[l] = in[k];
+            ++k, l++;
+        }
+        if (in[k] == '\n' && in[k - 1] == '\n') {
+            out[l] = in[k];
+            l++, k++;
+            while (in[k] == '\n') {
+                k++;
+            }
+        }
+        if (in[k] == '\n' && in[k - 1] != '\n') {
+            out[l] = in[k];
+            l++, k++;
+        }
+    }
+    out[l] = '\0';
+    return out;
+}
