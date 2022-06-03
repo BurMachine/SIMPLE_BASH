@@ -28,6 +28,7 @@ char *processing(char *format, char *input, char *out) {
     int l = 0;
     char tmp[500];
     copy(input, out);
+    int flag_nb = 0;
     for (int j = 0; j < count; j++) {
         n = 0; l = 0;
         if(format[j] == 'e') {
@@ -44,13 +45,15 @@ char *processing(char *format, char *input, char *out) {
             copy(tmp, out);
             continue;
         } 
-        if (format[j] == 'n') {
+        if (format[j] == 'n' && flag_nb != 1) {
             format_N(tmp, out);
             copy(tmp, out);
+            flag_nb = 1;
         }
-        if (format[j] == 'b') {
+        if (format[j] == 'b' && flag_nb != 1) {
             format_B(tmp, out);
             copy(tmp, out);
+            flag_nb = 1;
         }
         if (format[j] == 's') {
             format_S(tmp, out);
