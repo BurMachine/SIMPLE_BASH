@@ -24,41 +24,50 @@ void output (int ercode, char *out, char *name) {  // Вывод результ�
     }
 }
 
-void error12 () { // Тянет мусор
-    printf("%s%s%s%s%s%s%c", "usage: grep [-abcDEFGHhIiJLlmnOoqRSsUVvwxZ] [-A num] [-B num] "
-        "[-C[num]]\n"
-        "        [-e pattern] [-f file] [--binary-files=value] [--color=when]\n"
-        "        [--context[=num]] [--directories=action] [--label] "
-        "[--line-buffered]\n"
-        "        [--null] [pattern] [file ...]\n", '\0');
+void error12 () { 
+    printf("%s%s\n%s\n%s%s\n%s\n%c", "usage: grep [-abcDEFGHhIiJLlmnOoqRSsUVvwxZ] [-A num] [-B num] ",
+        "[-C[num]]",
+        "        [-e pattern] [-f file] [--binary-files=value] [--color=when]",
+        "        [--context[=num]] [--directories=action] [--label] ",
+        "[--line-buffered]",
+        "        [--null] [pattern] [file ...]", '\0');
 }
 
+void copy (char *in, char *out) {
+    int i = 0;
+    while (in[i] != '\0') {
+        out[i] = in[i];
+        ++i;
+    }
+    out[i] = '\0';
+}
 
-int find_opt(int argc, char *argv[], struct options opts) { 
+char *options(int argc, char *argv[], char *form) { // Тянет мусор
     int opt;
     int i = 0;
     while ((opt = getopt(argc, argv, "eilvcn")) != -1) {
         switch (opt) {
             case 'e':
-                opts.flag_e = 1;
+                form[i] = (char)opt;
                 break;
             case 'i':
-                opts.flag_i = 1;
-                break;
-            case 'v':
-                opts.flag_v = 1;
-                break;
-            case 'c':
-                opts.flag_c = 1;
+                form[i] = (char)opt;
                 break;
             case 'l':
-                opts.flag_l = 1;
+                form[i] = (char)opt;
                 break;
             case 'n':
-                opts.flag_n = 1;
+                form[i] = (char)opt;
+                break;
+            case 'c':
+                form[i] = (char)opt;
+                break;
+            case 'v':
+                form[i] = (char)opt;
                 break;
         }
         i++;
     }
-    return i;
+    form[i] = '\0';
+    return form;
 }

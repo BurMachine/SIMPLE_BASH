@@ -16,7 +16,8 @@ struct options {
 
 char *input (char *name, char *in);
 void output (int ercode, char *out, char *name);
-int find_opt(int argc, char *argv[], struct options opts);
+char *options(int argc, char *argv[], char *form);
+void copy (char *in, char *out);
 void error12 ();
 
 
